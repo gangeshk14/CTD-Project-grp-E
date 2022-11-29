@@ -22,18 +22,18 @@
 #     text = str(x)
 #     text_on_img(filename,text)
 
-# import math
-# if math.isclose(0,-1,rel_tol=0.25,abs_tol=25):
-#     print('x')
-# dic = {1:'hi', 3: 'grefds', 2:'frds'}
-# # dic.sort()
-# print(dic.items())
-# sdic = {x:y for x,y in sorted(dic.items())}
-# print(sdic)
+# # import math
+# # if math.isclose(0,-1,rel_tol=0.25,abs_tol=25):
+# #     print('x')
+# # dic = {1:'hi', 3: 'grefds', 2:'frds'}
+# # # dic.sort()
+# # print(dic.items())
+# # sdic = {x:y for x,y in sorted(dic.items())}
+# # print(sdic)
 
-from turtle import *
+# from turtle import *
 
-import turtle as tur 
+# import turtle as tur 
   
 
 # def func(i,j):
