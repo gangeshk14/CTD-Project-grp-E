@@ -149,6 +149,7 @@ while True:
     # quit set position (0,0)
     quit.speed(0)
     quit.setposition(0,0)
+    quit.hideturtle()
     # Choose a number of enemies
     number_of_enemies = 10
     # Creat an empty list of enemies
@@ -159,7 +160,8 @@ while True:
     for eqn,ans in eqns.items():
         # create the enemy
         ordered_enemies[turtle.Turtle()] = ans
-    enemies_list = random.shuffle(list(ordered_enemies.items()))
+    enemies_list = list(ordered_enemies.items())
+    random.shuffle(enemies_list)
     enemies = dict(enemies_list)
 
     # end state 
