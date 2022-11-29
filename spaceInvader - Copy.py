@@ -141,16 +141,23 @@ while True:
     # reset.setheading(90)
     reset.speed(0)
     reset.setposition(-330, 310)
+    quit.hideturtle()
     # Choose a number of enemies
     number_of_enemies = 10
     # Creat an empty list of enemies
-    enemies = {}
+    ordered_enemies = {}
     #choose pos of ans:
     ans_pos = random.randint(0,9)
     # Add enemies to the list
     for eqn,ans in eqns.items():
         # create the enemy
-        enemies[turtle.Turtle()] = ans
+        ordered_enemies[turtle.Turtle()] = ans
+    #randomize enemies
+    enemies_list = list(ordered_enemies.items())
+    random.shuffle(enemies_list)
+    enemies = dict(enemies_list)
+
+
     
         
     phase = 0

@@ -22,13 +22,18 @@
 #     text = str(x)
 #     text_on_img(filename,text)
 
-# # import math
-# # if math.isclose(0,-1,rel_tol=0.25,abs_tol=25):
-# #     print('x')
-# # dic = {1:'hi', 3: 'grefds', 2:'frds'}
-# # # dic.sort()
-# # print(dic.items())
-# # sdic = {x:y for x,y in sorted(dic.items())}
+import math
+import random
+if math.isclose(0,-1,rel_tol=0.25,abs_tol=25):
+    print('x')
+dic = {1:'hi', 3: 'grefds', 2:'frds'}
+# dic.sort()
+ls = list(dic.items())
+print(dict(ls))
+random.shuffle(ls)
+print(dict(ls))
+
+# sdic = {x:y for x,y in random.shuffle(dic.items())}
 # # print(sdic)
 
 # from turtle import *
@@ -46,9 +51,9 @@
 # tur.forward(100)
  
 # tur.onclick(func)
-rst = 3
-def startover():
-    global rst
-    rst +=1
-    print(rst)
-startover()
+# rst = 3
+# def startover():
+#     global rst
+#     rst +=1
+#     print(rst)
+# startover()
