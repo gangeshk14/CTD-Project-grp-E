@@ -158,7 +158,9 @@ while True:
     # Add enemies to the list
     for eqn,ans in eqns.items():
         # create the enemy
-        enemies[turtle.Turtle()] = ans
+        ordered_enemies[turtle.Turtle()] = ans
+    enemies_list = random.shuffle(list(ordered_enemies.items()))
+    enemies = dict(enemies_list)
 
     # end state 
         # win game state - create this function and define conditions that happen at this state 
