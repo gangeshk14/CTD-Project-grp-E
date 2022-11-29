@@ -20,6 +20,7 @@ while True:
     turtle.register_shape("reset.gif")
     turtle.register_shape("end.gif") 
     turtle.register_shape("quit.gif") #yet to find
+    turtle.register_shape("endreset.gif")
 
 
     # Draw border
@@ -173,8 +174,12 @@ while True:
         for e in enemies:
             e.hideturtle()
         window.bgpic("end.gif") # insert relevant game pass image
+        window.bgcolor("black")
         reset.showturtle()
+        reset.setposition(-30, 0)
+        reset.shape("endreset.gif")
         quit.showturtle()
+        quit.setposition(30, 0)
     
         
     phase = 0
