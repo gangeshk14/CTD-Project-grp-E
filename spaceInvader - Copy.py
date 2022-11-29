@@ -18,8 +18,7 @@ while True:
     turtle.register_shape("tick.gif")
     turtle.register_shape("cross.gif")
     turtle.register_shape("reset.gif")
-    turtle.register_shape("end.gif") 
-    turtle.register_shape("quit.gif") #yet to find
+
 
 
     # Draw border
@@ -142,13 +141,6 @@ while True:
     # reset.setheading(90)
     reset.speed(0)
     reset.setposition(-330, 310)
-    # create quit turtle
-    quit = turtle.Turtle()
-    quit.shape("quit.gif")
-    quit.penup()
-    # quit set position (0,0)
-    quit.speed(0)
-    quit.setposition(0,0)
     # Choose a number of enemies
     number_of_enemies = 10
     # Creat an empty list of enemies
@@ -159,22 +151,6 @@ while True:
     for eqn,ans in eqns.items():
         # create the enemy
         enemies[turtle.Turtle()] = ans
-
-    # end state 
-        # win game state - create this function and define conditions that happen at this state 
-        # hide turtles - follow game over
-        # show reset turtle 
-        # create restart and quit button -> register shape for individual gifs
-        # onclick conditions for both 
-        # define proper win state as the condition for when to call function 
-    def game_pass(): 
-        player.hideturtle()
-        bullet.hideturtle()
-        for e in enemies:
-            e.hideturtle()
-        window.bgpic("end.gif") # insert relevant game pass image
-        reset.showturtle()
-        quit.showturtle()
     
         
     phase = 0
@@ -377,7 +353,8 @@ while True:
                 Game_Over = True
             if Game_Over == True:
                 qn_num = 0
-                game_pass()
+                window.bgpic("end.gif")
+                player.hideturtle()
 
         # Move the bullet
         if bulletstate == "fire":
