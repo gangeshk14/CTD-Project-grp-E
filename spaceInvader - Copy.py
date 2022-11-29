@@ -19,7 +19,7 @@ while True:
     turtle.register_shape("cross.gif")
     turtle.register_shape("reset.gif")
     turtle.register_shape("end.gif") 
-    turtle.register_shape("quit.gif") #yet to find
+    turtle.register_shape("quit.gif")
     turtle.register_shape("endreset.gif")
 
 
@@ -145,6 +145,7 @@ while True:
     reset.setposition(-330, 310)
     # create quit turtle
     quit = turtle.Turtle()
+    quit.hideturtle()
     quit.shape("quit.gif")
     quit.penup()
     # quit set position (0,0)
@@ -176,10 +177,21 @@ while True:
         window.bgpic("end.gif") # insert relevant game pass image
         window.bgcolor("black")
         reset.showturtle()
-        reset.setposition(-30, 0)
+        reset.setposition(-100, -150)
         reset.shape("endreset.gif")
         quit.showturtle()
-        quit.setposition(30, 0)
+        quit.setposition(100, -150)
+        eqn_pen.clear()
+        score_pen.clear()
+        score_pen.setposition(0, 150)
+        scorestring = "SCORE: %s" % score
+        score_pen.write(scorestring, False, align="center", font=("Arial", 50, "bold"))
+
+    def quit_game():
+        if quit.onclick():
+            turtle.bye()
+    
+    
     
         
     phase = 0
