@@ -151,16 +151,20 @@ while True:
     # quit set position (0,0)
     quit.speed(0)
     quit.setposition(0,0)
+    quit.hideturtle()
     # Choose a number of enemies
     number_of_enemies = 10
     # Creat an empty list of enemies
-    enemies = {}
+    ordered_enemies = {}
     #choose pos of ans:
     ans_pos = random.randint(0,9)
     # Add enemies to the list
     for eqn,ans in eqns.items():
         # create the enemy
-        enemies[turtle.Turtle()] = ans
+        ordered_enemies[turtle.Turtle()] = ans
+    enemies_list = list(ordered_enemies.items())
+    random.shuffle(enemies_list)
+    enemies = dict(enemies_list)
 
     # end state 
         # win game state - create this function and define conditions that happen at this state 
