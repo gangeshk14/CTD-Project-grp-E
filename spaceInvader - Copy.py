@@ -3,6 +3,8 @@ import turtle
 import math
 import random
 import time
+import json
+
 
 # Set up the game window screen
 window = turtle.Screen()
@@ -281,9 +283,8 @@ while True:
         scorestring = "SCORE: %s" % score
         score_pen.write(scorestring, False, align="center", font=("Arial", 50, "bold"))
 
-    def quit_game():
-        if quit.onclick():
-            turtle.bye()
+    def quit_game(x,y):
+        turtle.bye()
     
     
     
@@ -296,7 +297,7 @@ while True:
         enemy.shape(num)
         enemy.penup()
         enemy.speed(0)
-        x = random.randint(-200+(phase*50),-190+(phase*50) )
+        x = random.randint(-200+(phase*50),-185+(phase*50) )
         y = random.randint(100, 250)
         enemy.setposition(x, y)
         phase = phase+1
@@ -385,7 +386,7 @@ while True:
                 )
                 qn_num+=1
                 write_qn(qn_num)
-                # Game_Over = True
+                Game_Over = True
             else:
                 enemy.hideturtle()
                 cross.setpos(enemy.xcor(),enemy.ycor())
@@ -430,6 +431,7 @@ while True:
             global rst
             rst = True
         reset.onclick(startover)
+        quit.onclick(quit_game)
         for enemy,digit in enemies.items():
             # Move the enemy
             x = enemy.xcor()
