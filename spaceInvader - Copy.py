@@ -7,6 +7,43 @@ import time
 # Set up the game window screen
 window = turtle.Screen()
 
+begin_game = False
+def begin(x,y): 
+    global begin_game 
+    begin_game = True
+window.bgpic("start_game.gif") 
+window.bgcolor("pink") 
+window.title("Space Invaders - Math version")       
+turtle.register_shape("beginner.gif")     
+turtle.register_shape("advanced.gif") 
+#create beginner turtle: 
+turtle.register_shape("beginner.gif") 
+beginner = turtle.Turtle() 
+beginner.shape("beginner.gif") 
+beginner.penup()
+beginner.speed(0)
+beginner.setposition(0,0) 
+
+
+#create advanced turtle: 
+turtle.register_shape("advanced.gif") 
+advanced = turtle.Turtle() 
+advanced.shape("advanced.gif") 
+advanced.penup()
+advanced.speed(0)
+advanced.setposition(0,-70)
+advanced.setheading(90)
+
+while True: 
+    beginner.onclick(begin)
+    advanced.onclick(begin)
+    if begin_game:
+        win = turtle.Screen()
+        win.clear()
+        break
+
+
+
 while True:
     window.bgcolor("green")
     window.title("Space Invaders - CopyAssignment")
@@ -21,6 +58,7 @@ while True:
     turtle.register_shape("end.gif") 
     turtle.register_shape("quit.gif")
     turtle.register_shape("endreset.gif")
+
 
 
     # Draw border
@@ -399,7 +437,7 @@ while True:
             # print(bullet.ycor())
             # newEnem = {i.ycor():i for i in enemies}
             # sortEnem = {ycor:Enem for ycor,Enem in sorted(newEnem.items())}
-            # print(sortEnem)
+            # print(sortEnem)git 
             for enemy,ans in enemies.items():
                 if enemy.isvisible():
                     xcoord = enemy.xcor()
