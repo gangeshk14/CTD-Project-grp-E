@@ -261,17 +261,56 @@ while True:
             bullet.showturtle()
             
 
-
-    # For collision between enemy and bullet
-    def isCollision_enemy_bullet(t1, t2):
-        distance = math.sqrt(
-            math.pow(t1.xcor() - t2.xcor(), 2) + math.pow(t1.ycor() - t2.ycor(), 2)
-        )
-        if distance < 25:
-            return True
-        else:
-            return False
-
+    #takes in enemy at bullet path then checks with answer
+    def collision(enemy):
+        global qn_num
+        global score
+        global Game_Over
+        global bulletstate
+        if enemy.isvisible():
+            # Reset the bullet
+            bullet.hideturtle()
+            bulletstate = "ready"
+            bullet.setposition(0, -400)
+            # Reset the enemy
+            # x = random.randint(-200, 200)
+            # y = random.randint(100, 250)
+            # enemy.setposition(x, y)
+            # enemyspeed += 0.5
+            # update the score
+            
+            if enemies[enemy] == list(eqns.values())[qn_num]:
+                enemy.hideturtle()
+                tick.setpos(enemy.xcor(),enemy.ycor())
+                tick.showturtle()
+                time.sleep(0.3)
+                tick.hideturtle()
+                # enemy.setpos(-300,300)
+                score += 10
+                scorestring = "Score: %s" % score
+                #score_equation = "X + 2 = 4"
+                score_pen.clear()
+                score_pen.write(
+                    scorestring, False, align="left", font=("Arial", 14, "normal"), 
+                )
+                qn_num+=1
+                write_qn(qn_num)
+                # Game_Over = True
+            else:
+                enemy.hideturtle()
+                cross.setpos(enemy.xcor(),enemy.ycor())
+                cross.showturtle()
+                time.sleep(0.3)
+                cross.hideturtle()
+                enemy.setpos(enemy.xcor(),enemy.ycor())
+                enemy.showturtle()
+                score -= 5
+                scorestring = "Score: %s" % score
+                #score_equation = "X + 2 = 4"
+                score_pen.clear()
+                score_pen.write(
+                    scorestring, False, align="left", font=("Arial", 14, "normal"), 
+                )
 
     # For collision between enemy and player
     def isCollision_enemy_player(t1, t2):
@@ -343,53 +382,6 @@ while True:
                         e.showturtle()
                 # Change enemy direction
                 enemyspeed *= -1
-
-            # check for a collision between the bullet and the enemy
-            if enemy.isvisible():
-                if isCollision_enemy_bullet(bullet, enemy):
-                    # Reset the bullet
-                    bullet.hideturtle()
-                    bulletstate = "ready"
-                    bullet.setposition(0, -400)
-                    # Reset the enemy
-                    # x = random.randint(-200, 200)
-                    # y = random.randint(100, 250)
-                    # enemy.setposition(x, y)
-                    # enemyspeed += 0.5
-                    # update the score
-                    
-                    if enemies[enemy] == list(eqns.values())[qn_num]:
-                        enemy.hideturtle()
-                        tick.setpos(enemy.xcor(),enemy.ycor())
-                        tick.showturtle()
-                        time.sleep(0.3)
-                        tick.hideturtle()
-                        # enemy.setpos(-300,300)
-                        score += 10
-                        scorestring = "Score: %s" % score
-                        #score_equation = "X + 2 = 4"
-                        score_pen.clear()
-                        score_pen.write(
-                            scorestring, False, align="left", font=("Arial", 14, "normal"), 
-                        )
-                        qn_num+=1
-                        write_qn(qn_num)
-                        Game_Over = True
-                    else:
-                        enemy.hideturtle()
-                        cross.setpos(enemy.xcor(),enemy.ycor())
-                        cross.showturtle()
-                        time.sleep(0.3)
-                        cross.hideturtle()
-                        enemy.setpos(enemy.xcor(),enemy.ycor())
-                        enemy.showturtle()
-                        score -= 5
-                        scorestring = "Score: %s" % score
-                        #score_equation = "X + 2 = 4"
-                        score_pen.clear()
-                        score_pen.write(
-                            scorestring, False, align="left", font=("Arial", 14, "normal"), 
-                        )
                 
             # check for a collision between the player and enemy
             if isCollision_enemy_player(player, enemy):
@@ -400,15 +392,15 @@ while True:
                 qn_num = 0
                 game_pass()
 
-        # Move the bullet
+        # Move the bullet with turtle.forward when it theres
         if bulletstate == "fire":
             enemy_pos = 0
             xbull = bullet.xcor()
             # print(bullet.ycor())
-            newEnem = {i.ycor():i for i in enemies}
-            sortEnem = {ycor:Enem for ycor,Enem in sorted(newEnem.items())}
+            # newEnem = {i.ycor():i for i in enemies}
+            # sortEnem = {ycor:Enem for ycor,Enem in sorted(newEnem.items())}
             # print(sortEnem)
-            for ycor,enemy in sortEnem.items():
+            for enemy,ans in enemies.items():
                 if enemy.isvisible():
                     xcoord = enemy.xcor()
                     # print(xcoord)
@@ -419,6 +411,8 @@ while True:
                         enemy_pos+=1
                         bullet.hideturtle()
                         bulletstate = "ready"
+                        #colliion func
+                        collision(enemy)
                         break
             if enemy_pos == 0:
                 bullet.forward(530)
