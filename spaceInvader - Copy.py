@@ -6,6 +6,20 @@ import time
 import json
 
 
+json_scores = open('data.json')
+scores_dict = json.load(json_scores)
+json_scores.close()
+# print(scores_dict)
+# print(scores_dict['scores'])
+sortedScores = dict(sorted(scores_dict['scores'].items(), key = lambda x:x[1], reverse = True))
+scoreListString = ""
+for k,v in sortedScores.items():
+    print(v)
+    scoreListString = scoreListString + "{0} : {1} \n".format(k,v)
+print(scoreListString)
+
+
+
 # Set up the game window screen
 window = turtle.Screen()
 
@@ -35,6 +49,15 @@ advanced.penup()
 advanced.speed(0)
 advanced.setposition(0,-70)
 advanced.setheading(90)
+
+# list of scores
+highScore = turtle.Turtle()
+highScore.speed(0)
+highScore.color("red")
+highScore.penup()
+highScore.hideturtle()
+highScore.setposition(-300, 260)
+highScore.write(scoreListString, False, align="center", font=("Arial", 15, "normal"))
 
 while True: 
     beginner.onclick(begin)
