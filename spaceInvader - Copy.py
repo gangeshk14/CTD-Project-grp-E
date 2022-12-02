@@ -4,19 +4,26 @@ import math
 import random
 import time
 import json
+import threading
+from itertools import cycle
 
-
-json_scores = open('data.json')
-scores_dict = json.load(json_scores)
-json_scores.close()
-# print(scores_dict)
+with open('data.json') as file:
+    scores_dict = json.load(file)
+print(scores_dict)
 # print(scores_dict['scores'])
-sortedScores = dict(sorted(scores_dict['scores'].items(), key = lambda x:x[1], reverse = True))
-scoreListString = ""
-for k,v in sortedScores.items():
+#beginner
+beginnerScores = dict(sorted(scores_dict['scores']['beginner'].items(), key = lambda x:x[1], reverse = True))
+beginnerStr = ""
+for k,v in beginnerScores.items():
     print(v)
-    scoreListString = scoreListString + "{0} : {1} \n".format(k,v)
-print(scoreListString)
+    beginnerStr = beginnerStr + "{0} : {1}\n".format(k,v)
+#advanced
+advScores = dict(sorted(scores_dict['scores']['advanced'].items(), key = lambda x:x[1], reverse = True))
+advStr = ""
+for k,v in advScores.items():
+    print(v)
+    advStr = advStr + "{0} : {1} \n".format(k,v)
+print(advStr)
 
 
 
@@ -24,9 +31,18 @@ print(scoreListString)
 window = turtle.Screen()
 
 begin_game = False
+nameInput = "sfd"
 def begin(x,y): 
+    global nameInput
+    nameInput= turtle.textinput("Please input a username", "Please input a username")
     global begin_game 
     begin_game = True
+    while nameInput == "" or nameInput == None or len(nameInput) >10 :
+        if nameInput == "" or nameInput == None:
+            nameInput = turtle.textinput("You MUST input a valid name", "You MUST input a valid name")
+        elif len(nameInput) >10:
+            nameInput = turtle.textinput("Name is too long", "Name must be less than 10 characters")
+
 window.bgpic("start_game.gif") 
 window.bgcolor("pink") 
 window.title("Space Invaders - Math version")       
@@ -38,7 +54,7 @@ beginner = turtle.Turtle()
 beginner.shape("beginner.gif") 
 beginner.penup()
 beginner.speed(0)
-beginner.setposition(0,0) 
+beginner.setposition(-100,0) 
 
 
 #create advanced turtle: 
@@ -47,25 +63,62 @@ advanced = turtle.Turtle()
 advanced.shape("advanced.gif") 
 advanced.penup()
 advanced.speed(0)
-advanced.setposition(0,-70)
+advanced.setposition(60,0)
 advanced.setheading(90)
 
-# list of scores
-highScore = turtle.Turtle()
-highScore.speed(0)
-highScore.color("red")
-highScore.penup()
-highScore.hideturtle()
-highScore.setposition(-300, 260)
-highScore.write(scoreListString, False, align="center", font=("Arial", 15, "normal"))
+# list of beginner scores
+bgHighScore = turtle.Turtle()
+bgHighScore.speed(0)
+# bgHighScore.color("#FF5733")
+bgHighScore.color("white")
+bgHighScore.penup()
+bgHighScore.hideturtle()
+bgHighScore.setposition(-135, -50)
+for k,v in beginnerScores.items():
+    output = k + ': ' +str(v)
+    bgHighScore.write(output, False, align="left", font=("Public Pixel", 9, "bold"))
+    bgHighScore.goto(-135, bgHighScore.ycor() - 20)
 
+# list of advancedscores
+advHighScore = turtle.Turtle()
+advHighScore.speed(0)
+advHighScore.color("#FF5733")
+advHighScore.penup()
+advHighScore.hideturtle()
+advHighScore.setposition(20, -50)
+
+for k,v in advScores.items():
+    output = k + ': ' +str(v)
+    advHighScore.write(output, False, align="left", font=("Public Pixel", 9, "bold"))
+    advHighScore.goto(20, advHighScore.ycor() - 20)
+
+clickbtn = turtle.Turtle()
+clickbtn.color('white')
+clickbtn.speed(0)
+clickbtn.penup()
+clickbtn.hideturtle()
+clickbtn.setpos(-170,50)
+colors = ['red','green','blue']
+itercolors = cycle(colors)
 while True: 
+    clickbtn.write('Click buttons below to begin', False, align="left", font=("Public Pixel", 13, "bold"))
+    clickbtn.color(next(itercolors))
     beginner.onclick(begin)
     advanced.onclick(begin)
     if begin_game:
         win = turtle.Screen()
         win.clear()
         break
+    # time.sleep(0.5)
+
+
+print(nameInput)
+# with open('data.json','r') as file:
+#     scores_dict = json.load(file)
+# scores_dict["scores"][nameInput] = 90
+# with open('data.json','w') as file:
+#     json.dump(scores_dict,file)
+
 
 
 
@@ -145,7 +198,7 @@ while True:
      
             total = random.randint(y,9) 
             expected_ans = total - y  
-            print("y value:",y,"total:",total,"expected:",expected_ans) 
+            # print("y value:",y,"total:",total,"expected:",expected_ans) 
  
             equation = "a + {0} = {1}".format(y, total) 
              
@@ -160,7 +213,7 @@ while True:
                     if expected_ans >= 0: 
                         positive_ans = True 
                  
-                print("y value:", y, "total:",total,"expected:", expected_ans) 
+                # print("y value:", y, "total:",total,"expected:", expected_ans) 
                 equation = "{0} - a = {1} ".format(total, y) 
                 return equation,expected_ans 
          
@@ -173,7 +226,7 @@ while True:
                     nonzero = True  
  
             expected_ans = total1 
-            print("y value:", y, "total:",total,"expected:", expected_ans) 
+            # print("y value:", y, "total:",total,"expected:", expected_ans) 
             equation = "a x  {0} = {1}".format(y, total) 
             return equation,expected_ans 
          
@@ -186,7 +239,7 @@ while True:
                     nonzero = True  
  
             expected_ans = total1 
-            print("y value:", y, "total:",total,"expected:", expected_ans) 
+            # print("y value:", y, "total:",total,"expected:", expected_ans) 
             equation = "{1} / a = {0}".format(y, total) 
             return equation,expected_ans
     eqns = {}
@@ -200,7 +253,7 @@ while True:
         eqns[eqn] = ans
 
     # new!! - write equation at the center of the frame
-    print(list(eqns.keys()))
+    # print(list(eqns.keys()))
     qn_num = 0
     print(qn_num)
     eqn_pen = turtle.Turtle()
