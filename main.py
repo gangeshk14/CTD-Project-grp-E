@@ -147,7 +147,7 @@ while True:
         window.bgcolor("black")
         game_icons.icons_end()
         scorestring = "SCORE: %s" % score
-        game_bg.bg_end(scorestring)
+        game_bg.bg_end(scorestring, score)
         jsonfunc.endpagescr(nameInput,game_mode,score)        
 
     #takes in enemy at bullet path then checks with answer
@@ -176,7 +176,7 @@ while True:
                 )
                 qn_num+=1
                 game_bg.write_qn(qn_num,eqns)
-                Game_Over = True
+                # Game_Over = True
             else:
                 enemy.hideturtle()
                 cross.setpos(enemy.xcor(),enemy.ycor())

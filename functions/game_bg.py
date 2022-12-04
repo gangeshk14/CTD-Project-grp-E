@@ -71,7 +71,7 @@ def bg_setup():
 
     return border_pen, score_pen, eqn_pen, end_message
 
-def bg_end(scorestring):
+def bg_end(scorestring, score):
         eqn_pen.clear()
         score_pen.clear()
         score_pen.setposition(0, 150)
