@@ -7,6 +7,8 @@ import json
 import threading
 from itertools import cycle
 
+
+
 with open('data.json') as file:
     scores_dict = json.load(file)
 print(scores_dict)
@@ -29,7 +31,7 @@ print(advStr)
 
 # Set up the game window screen
 window = turtle.Screen()
-
+canvas = turtle.getcanvas()
 begin_game = False
 nameInput = "sfd"
 def begin(x,y): 
@@ -43,41 +45,57 @@ def begin(x,y):
         elif len(nameInput) >10:
             nameInput = turtle.textinput("Name is too long", "Name must be less than 10 characters")
 
-window.bgpic("start_game.gif") 
+window.bgpic("game_gifs/start_game.gif") 
 window.bgcolor("pink") 
 window.title("Space Invaders - Math version")       
-turtle.register_shape("beginner.gif")     
-turtle.register_shape("advanced.gif") 
+turtle.register_shape("game_gifs/beginner.gif")     
+turtle.register_shape("game_gifs/advanced.gif") 
+turtle.register_shape("game_gifs/black.gif") 
 #create beginner turtle: 
-turtle.register_shape("beginner.gif") 
-beginner = turtle.Turtle() 
-beginner.shape("beginner.gif") 
+turtle.register_shape("game_gifs/beginner.gif") 
+startgame = turtle.Turtle()
+startgame.penup()
+startgame.speed(0)
+startgame.hideturtle()
+startgame.color('white')
+startgame.setposition(-160,100)
+startgame.write('Ready?', False, align="left", font=("Public Pixel", 60, "bold"))
+beginner = turtle.Turtle()
+beginner.shape("game_gifs/beginner.gif") 
 beginner.penup()
 beginner.speed(0)
-beginner.setposition(-100,0) 
-
+beginner.setposition(-110,0) 
+beginnertxt = turtle.Turtle() 
+beginnertxt.color('white')
+beginnertxt.penup()
+beginnertxt.speed(0)
+beginnertxt.setposition(-144,-3) 
+beginnertxt.hideturtle()
+beginnertxt.write('BEGINNER', False, align="left", font=("Public Pixel", 11, "bold"))
 
 #create advanced turtle: 
-turtle.register_shape("advanced.gif") 
+turtle.register_shape("game_gifs/advanced.gif") 
 advanced = turtle.Turtle() 
-advanced.shape("advanced.gif") 
+advanced.shape("game_gifs/advanced.gif") 
 advanced.penup()
 advanced.speed(0)
-advanced.setposition(60,0)
+advanced.setposition(70,0)
 advanced.setheading(90)
 
 # list of beginner scores
+rank = 1
 bgHighScore = turtle.Turtle()
 bgHighScore.speed(0)
 # bgHighScore.color("#FF5733")
 bgHighScore.color("white")
 bgHighScore.penup()
 bgHighScore.hideturtle()
-bgHighScore.setposition(-135, -50)
+bgHighScore.setposition(-145, -50)
 for k,v in beginnerScores.items():
-    output = k + ': ' +str(v)
+    output = str(rank) + '. ' + k + ': ' +str(v)
     bgHighScore.write(output, False, align="left", font=("Public Pixel", 9, "bold"))
-    bgHighScore.goto(-135, bgHighScore.ycor() - 20)
+    bgHighScore.goto(-145, bgHighScore.ycor() - 20)
+    rank = rank + 1
 
 # list of advancedscores
 advHighScore = turtle.Turtle()
@@ -85,12 +103,13 @@ advHighScore.speed(0)
 advHighScore.color("#FF5733")
 advHighScore.penup()
 advHighScore.hideturtle()
-advHighScore.setposition(20, -50)
-
+advHighScore.setposition(30, -50)
+rank = 1
 for k,v in advScores.items():
-    output = k + ': ' +str(v)
+    output = str(rank) + '. ' + k + ': ' +str(v)
     advHighScore.write(output, False, align="left", font=("Public Pixel", 9, "bold"))
-    advHighScore.goto(20, advHighScore.ycor() - 20)
+    advHighScore.goto(30, advHighScore.ycor() - 20)
+    rank +=1
 
 clickbtn = turtle.Turtle()
 clickbtn.color('white')
@@ -100,42 +119,66 @@ clickbtn.hideturtle()
 clickbtn.setpos(-170,50)
 colors = ['red','green','blue']
 itercolors = cycle(colors)
+
+mousex = 0
+mousey = 9
+def motion(event):
+    global mousex
+    global mousey
+    mousex, mousey = event.x, event.y
+    # beginner.color('green')
+    # beginner.write('BEGINNER', False, align="left", font=("Public Pixel", 11, "bold"))
+    # if 216<=x<=302 and 334<=y<=358:
+    #     beginner.color('green')
+    # else:
+    #     beginner.color('green')
+    # print(type(mousex))
+
+
 while True: 
     clickbtn.write('Click buttons below to begin', False, align="left", font=("Public Pixel", 13, "bold"))
     clickbtn.color(next(itercolors))
+    canvas.bind('<Motion>', motion)
+    print(mousex)
+    if 216<=mousex<=302 and 334<=mousey<=358:
+        beginnertxt.write('BEGINNER', False, align="left", font=("Public Pixel", 11, "bold"))
+        beginnertxt.color('green')
+        print('yes')
+    else:
+        beginnertxt.write('BEGINNER', False, align="left", font=("Public Pixel", 11, "bold"))
+        beginnertxt.color('white')
     beginner.onclick(begin)
     advanced.onclick(begin)
     if begin_game:
         win = turtle.Screen()
         win.clear()
         break
-    # time.sleep(0.5)
+
+#     # time.sleep(0.5)
 
 
-print(nameInput)
-# with open('data.json','r') as file:
-#     scores_dict = json.load(file)
-# scores_dict["scores"][nameInput] = 90
-# with open('data.json','w') as file:
-#     json.dump(scores_dict,file)
-
-
+# print(nameInput)
+# # with open('data.json','r') as file:
+# #     scores_dict = json.load(file)
+# # scores_dict["scores"][nameInput] = 90
+# # with open('data.json','w') as file:
+# #     json.dump(scores_dict,file)
 
 
 while True:
-    window.bgcolor("green")
+    window.bgcolor("black")
     window.title("Space Invaders - CopyAssignment")
-    window.bgpic("background.gif")
+    window.bgpic("game_gifs/background.gif")
 
     # Register the shape
     #"C:\Users\yuyin\Downloads\CTD_1D\Picture1.png"
-    turtle.register_shape("player.gif")
-    turtle.register_shape("tick.gif")
-    turtle.register_shape("cross.gif")
-    turtle.register_shape("reset.gif")
-    turtle.register_shape("end.gif") 
-    turtle.register_shape("quit.gif")
-    turtle.register_shape("endreset.gif")
+    turtle.register_shape("game_gifs/player.gif")
+    turtle.register_shape("game_gifs/tick.gif")
+    turtle.register_shape("game_gifs/cross.gif")
+    turtle.register_shape("game_gifs/reset.gif")
+    turtle.register_shape("game_gifs/end.gif") 
+    turtle.register_shape("game_gifs/quit.gif")
+    turtle.register_shape("game_gifs/endreset.gif")
 
 
 
@@ -191,7 +234,7 @@ while True:
         
     #     return equation,expected_ans
     def generate_qn_beginner(): 
-        qn_randomise = random.randint(1,4) 
+        qn_randomise = 3
         y = random.randint(0,9) 
         
         if qn_randomise == 1: #sum  
@@ -206,19 +249,20 @@ while True:
              
         elif qn_randomise == 2: #minus  
             #y = random.randint(0,9) 
-                positive_ans = False 
-                while positive_ans == False: 
-                    total = random.randint(0,y) 
-                    expected_ans = total - y 
-                    if expected_ans >= 0: 
-                        positive_ans = True 
+            positive_ans = False 
+            while positive_ans == False: 
+                total = random.randint(0,y) 
+                expected_ans = total - y 
+                if expected_ans >= 0: 
+                    positive_ans = True 
                  
-                # print("y value:", y, "total:",total,"expected:", expected_ans) 
-                equation = "{0} - a = {1} ".format(total, y) 
-                return equation,expected_ans 
+            # print("y value:", y, "total:",total,"expected:", expected_ans) 
+            equation = "{0} - a = {1} ".format(total, y) 
+            return equation,expected_ans 
          
         elif qn_randomise == 3: #times  
             nonzero = False 
+            y = random.randint(1,9)
             while nonzero == False: 
                 total1 = random.randint(0,9) 
                 total = total1*y 
@@ -230,7 +274,7 @@ while True:
             equation = "a x  {0} = {1}".format(y, total) 
             return equation,expected_ans 
          
-        else: 
+        elif qn_randomise == 4: 
             nonzero = False 
             while nonzero == False: 
                 total1 = random.randint(0,9) 
@@ -284,7 +328,7 @@ while True:
 
     # Create the player turtle
     player = turtle.Turtle()
-    player.shape("player.gif")
+    player.shape("game_gifs/player.gif")
     player.penup()
     player.speed(0)
     player.setposition(0, -250)
@@ -292,21 +336,21 @@ while True:
     playerspeed = 15
     #create tick turtle
     tick = turtle.Turtle()
-    tick.shape("tick.gif")
+    tick.shape("game_gifs/tick.gif")
     tick.penup()
     # tick.setheading(90)
     tick.speed(0)
     tick.hideturtle()
     #create cross turtle
     cross = turtle.Turtle()
-    cross.shape("cross.gif")
+    cross.shape("game_gifs/cross.gif")
     cross.penup()
     # cross.setheading(90)
     cross.speed(0)
     cross.hideturtle()
     #create reset turtle:
     reset = turtle.Turtle()
-    reset.shape("reset.gif")
+    reset.shape("game_gifs/reset.gif")
     reset.penup()
     # reset.setheading(90)
     reset.speed(0)
@@ -314,7 +358,7 @@ while True:
     # create quit turtle
     quit = turtle.Turtle()
     quit.hideturtle()
-    quit.shape("quit.gif")
+    quit.shape("game_gifs/quit.gif")
     quit.penup()
     # quit set position (0,0)
     quit.speed(0)
@@ -346,11 +390,11 @@ while True:
         bullet.hideturtle()
         for e in enemies:
             e.hideturtle()
-        window.bgpic("end.gif") # insert relevant game pass image
+        window.bgpic("game_gifs/end.gif") # insert relevant game pass image
         window.bgcolor("black")
         reset.showturtle()
         reset.setposition(-100, -150)
-        reset.shape("endreset.gif")
+        reset.shape("game_gifs/ndreset.gif")
         quit.showturtle()
         quit.setposition(100, -150)
         eqn_pen.clear()
@@ -604,5 +648,3 @@ while True:
             win = turtle.Screen()
             win.clear()
             break
-
-# turtle.done()
