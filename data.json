@@ -1,9 +1,20 @@
 {
-    "scores": 
-            {
-                "ash" : 65,
-                "haresh" : 100,
-                "juliana" : 50
-                
-            }
+    "scores": {
+        "beginner": {
+            "ash": 65,
+            "haresh": 100,
+            "juliana": 50,
+            "das": 90,
+            "ASHKSAMLQ": 90,
+            "ASHKAMLQ": 90
+        },
+        "advanced": {
+            "hh": 55,
+            "jj": 66,
+            "juliana": 50,
+            "das": 90,
+            "ASHKSAMLQ": 90,
+            "juliaa": 50
+        }
+    }
 }

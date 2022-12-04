@@ -12,12 +12,19 @@ with open('data.json') as file:
     scores_dict = json.load(file)
 print(scores_dict)
 # print(scores_dict['scores'])
-sortedScores = dict(sorted(scores_dict['scores'].items(), key = lambda x:x[1], reverse = True))
-scoreListString = ""
-for k,v in sortedScores.items():
+#beginner
+beginnerScores = dict(sorted(scores_dict['scores']['beginner'].items(), key = lambda x:x[1], reverse = True))
+beginnerStr = ""
+for k,v in beginnerScores.items():
     print(v)
-    scoreListString = scoreListString + "{0} : {1} \n".format(k,v)
-print(scoreListString)
+    beginnerStr = beginnerStr + "{0} : {1}\n".format(k,v)
+#advanced
+advScores = dict(sorted(scores_dict['scores']['advanced'].items(), key = lambda x:x[1], reverse = True))
+advStr = ""
+for k,v in advScores.items():
+    print(v)
+    advStr = advStr + "{0} : {1} \n".format(k,v)
+print(advStr)
 
 
 
@@ -25,7 +32,13 @@ print(scoreListString)
 window = turtle.Screen()
 canvas = turtle.getcanvas()
 begin_game = False
-def begin(x,y): 
+nameInput = ""
+game_mode = ''
+def beginner_begin(x,y):
+    global game_mode
+    game_mode = beginner.name
+    global nameInput
+    nameInput= turtle.textinput("Please input a username", "Please input a username")
     global begin_game 
     begin_game = True
     while nameInput == "" or nameInput == None or len(nameInput) >10 :
@@ -34,7 +47,22 @@ def begin(x,y):
         elif len(nameInput) >10:
             nameInput = turtle.textinput("Name is too long", "Name must be less than 10 characters")
 
-window.bgpic("start_game.gif") 
+def advanced_begin(x,y):
+    global game_mode
+    game_mode = advanced.name
+    print(game_mode)
+    global nameInput
+    nameInput= turtle.textinput("Please input a username", "Please input a username")
+    global begin_game 
+    begin_game = True
+    while nameInput == "" or nameInput == None or len(nameInput) >10 :
+        if nameInput == "" or nameInput == None:
+            nameInput = turtle.textinput("You MUST input a valid name", "You MUST input a valid name")
+        elif len(nameInput) >10:
+            nameInput = turtle.textinput("Name is too long", "Name must be less than 10 characters")
+            
+
+window.bgpic("game_gifs/start_game.gif") 
 window.bgcolor("pink") 
 window.title("Space Invaders - Math version")       
 turtle.register_shape("game_gifs/beginner.gif")     

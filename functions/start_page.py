@@ -50,7 +50,8 @@ def start_page(beginnerScores,advScores):
     bgHighScore.penup()
     bgHighScore.hideturtle()
     bgHighScore.setposition(-145, -50)
-    for k,v in beginnerScores.items():
+    for pos in range(5):
+        k,v = list(beginnerScores.items())[pos]
         output = str(rank) + '. ' + k + ': ' +str(v)
         bgHighScore.write(output, False, align="left", font=("Public Pixel", 9, "bold"))
         bgHighScore.goto(-145, bgHighScore.ycor() - 20)
@@ -64,7 +65,8 @@ def start_page(beginnerScores,advScores):
     advHighScore.hideturtle()
     advHighScore.setposition(30, -50)
     rank = 1
-    for k,v in advScores.items():
+    for pos in range(5):
+        k,v = list(advScores.items())[pos]
         output = str(rank) + '. ' + k + ': ' +str(v)
         advHighScore.write(output, False, align="left", font=("Public Pixel", 9, "bold"))
         advHighScore.goto(30, advHighScore.ycor() - 20)

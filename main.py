@@ -14,7 +14,23 @@ beginnerScores, advScores = jsonfunc.startpagescrs()
 
 begin_game = False
 nameInput = ""
-def begin(x,y): 
+def beginner_begin(x,y):
+    global game_mode
+    game_mode = "beginner"
+    global nameInput
+    nameInput= turtle.textinput("Please input a username", "Please input a username")
+    global begin_game 
+    begin_game = True
+    while nameInput == "" or nameInput == None or len(nameInput) >10 :
+        if nameInput == "" or nameInput == None:
+            nameInput = turtle.textinput("You MUST input a valid name", "You MUST input a valid name")
+        elif len(nameInput) >10:
+            nameInput = turtle.textinput("Name is too long", "Name must be less than 10 characters")
+
+def advanced_begin(x,y):
+    global game_mode
+    game_mode = "advanced"
+    print(game_mode)
     global nameInput
     nameInput= turtle.textinput("Please input a username", "Please input a username")
     global begin_game 
@@ -57,14 +73,14 @@ while True:
     # else:
     #     beginnertxt.write('BEGINNER', False, align="left", font=("Public Pixel", 11, "bold"))
     #     beginnertxt.color('white')
-    beginner.onclick(begin)
-    advanced.onclick(begin)
+    beginner.onclick(beginner_begin)
+    advanced.onclick(advanced_begin)
     if begin_game:
         win = turtle.Screen()
         win.clear()
         break
 
-
+print(game_mode)
 while True:
     #setup background
     window.bgcolor("black")
@@ -131,7 +147,8 @@ while True:
         window.bgcolor("black")
         game_icons.icons_end()
         scorestring = "SCORE: %s" % score
-        game_bg.bg_end(scorestring)        
+        game_bg.bg_end(scorestring)
+        jsonfunc.endpagescr(nameInput,game_mode,score)        
 
     #takes in enemy at bullet path then checks with answer
     def collision_enemy_bullet(enemy):
