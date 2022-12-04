@@ -86,7 +86,7 @@ while True:
     window.bgcolor("black")
     window.title("Space Invaders - CopyAssignment")
     window.bgpic("game_gifs/background.gif")
-    border_pen, score_pen, eqn_pen = game_bg.bg_setup()
+    border_pen, score_pen, eqn_pen, end_message = game_bg.bg_setup()
     score = game_bg.score
     print('rest')
 
