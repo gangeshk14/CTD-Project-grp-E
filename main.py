@@ -235,16 +235,6 @@ while True:
                     y = e.ycor()
                     y -= 40
                     e.sety(y)
-                    if e.ycor() < -285 and Game_Over == False:
-                        e.hideturtle()
-                        missed_enemies += 1
-                        if missed_enemies == 5:
-                            Game_Over = True
-                        x = random.randint(-200, 200)
-                        y = random.randint(100, 250)
-                        e.setposition(x, y)
-                        e.showturtle()
-                # Change enemy direction
                 enemyspeed *= -1
 
             if enemy.xcor() < -270:
@@ -253,16 +243,6 @@ while True:
                     y = e.ycor()
                     y -= 40
                     e.sety(y)
-                    if e.ycor() < -285 and Game_Over == False:
-                        e.hideturtle()
-                        missed_enemies += 1
-                        if missed_enemies == 5:
-                            Game_Over = True
-                        x = random.randint(-200, 200)
-                        y = random.randint(100, 250)
-                        e.setposition(x, y)
-                        e.showturtle()
-                # Change enemy direction
                 enemyspeed *= -1
                 
             # check for a collision between the player and enemy
