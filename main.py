@@ -106,7 +106,10 @@ try:
         eqns = {}
         for num in range(10):
             while True:
-                eqn,ans = equations.generate_qn_beginner()
+                if game_mode == "beginner":
+                    eqn,ans = equations.generate_qn_beginner()
+                elif game_mode == "advanced":
+                    eqn,ans = equations.generate_qn_advanced()
                 if eqn in eqns:
                     continue
                 else:
