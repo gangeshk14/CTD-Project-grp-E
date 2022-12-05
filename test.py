@@ -57,7 +57,11 @@
 #     rst +=1
 #     print(rst)
 # startover()
-x = {"f":1}
-print(x[0])
+import sys 
+from subprocess import call 
+if sys.platform == 'linux2': 
+    call(["xdg-open","sound.mp3"]) 
+elif sys.platform == 'darwin': 
+    call(["afplay","sound.mp3"])
 
 
