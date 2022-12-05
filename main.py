@@ -20,12 +20,17 @@ try:
         global nameInput
         nameInput= turtle.textinput("Please input a username", "Please input a username")
         global begin_game 
-        begin_game = True
-        while nameInput == "" or nameInput == None or len(nameInput) >10 :
+    
+        while nameInput == "" or len(nameInput) >10 :
             if nameInput == "" or nameInput == None:
                 nameInput = turtle.textinput("You MUST input a valid name", "You MUST input a valid name")
             elif len(nameInput) >10:
                 nameInput = turtle.textinput("Name is too long", "Name must be less than 10 characters")
+
+            elif nameInput == None:
+                begin_game = False
+    
+        begin_game = True 
 
     def advanced_begin(x,y):
         global game_mode
@@ -34,12 +39,19 @@ try:
         global nameInput
         nameInput= turtle.textinput("Please input a username", "Please input a username")
         global begin_game 
-        begin_game = True
-        while nameInput == "" or nameInput == None or len(nameInput) >10 :
+    
+        while nameInput == "" or len(nameInput) >10 :
             if nameInput == "" or nameInput == None:
                 nameInput = turtle.textinput("You MUST input a valid name", "You MUST input a valid name")
             elif len(nameInput) >10:
                 nameInput = turtle.textinput("Name is too long", "Name must be less than 10 characters")
+        
+            elif nameInput == None:
+                begin_game = False
+    
+        begin_game = True 
+
+
     # Set up the game window screen
     startgame, beginner,advanced, clickbtn, window, canvas = start_page.start_page(beginnerScores,advScores)
 
