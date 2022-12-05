@@ -58,7 +58,7 @@ def icons_end():
     quit.setposition(100, -150)
 
 #game methods
-playerspeed = 10
+playerspeed = 30
 def plyr_left():
     x = player.xcor()
     x -= playerspeed
