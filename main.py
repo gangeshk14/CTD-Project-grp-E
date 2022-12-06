@@ -12,6 +12,7 @@ from threading import Thread
 
 try:
     window = turtle.Screen()
+    
     #get high scores
     beginnerScores, advScores = jsonfunc.startpagescrs()
 
