@@ -1,4 +1,4 @@
-from functions import start_page , jsonfunc, game_bg, equations, game_icons
+from functions import jsonfunc, start_page, game_bg, equations, game_icons
 # importing turtle, math and random python modules
 import turtle
 import math
@@ -267,7 +267,8 @@ try:
             for enemy,digit in enemies.items():
                 # Move the enemy
                 x = enemy.xcor()
-                x += enemyspeed
+                x += enemyspeed 
+                
                 enemy.setx(x)
 
                 # Move the enemy back and down
