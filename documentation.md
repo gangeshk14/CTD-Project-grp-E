@@ -41,7 +41,9 @@ By providing an engaging medium in which to practice these skills, students can 
 ## Playing the Game
 
 The game is started by selecting a difficulty on the main menu.
-Player input in the game is controlled by the left and right arrow keys, and the .
+Player input in the game is controlled by the left and right arrow keys, and bullets are spawned with the spacebar.
+The objective is to shoot the number that corresponds with the answer for the equation displayed on the top right.
+All questions must be answered before the numbers can touch the player sprite.
 
 ## Features
 
