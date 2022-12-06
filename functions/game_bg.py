@@ -1,7 +1,16 @@
 import turtle
 import random
+import sys 
+import subprocess
+from threading import Thread
 
 
+def openbgmusic():
+    global bgmusic
+    if sys.platform == 'linux2': 
+        call(["xdg-open","sound.mp3"]) 
+    elif sys.platform == 'darwin': 
+        bgmusic = subprocess.Popen(["afplay","game_music/shrek.m4a"])
 
 score = 0
 qn_num = 0
@@ -16,6 +25,9 @@ def write_qn(qn_num,eqns):
         eqn_pen.clear()
 
 def bg_setup():
+    global bgplay
+    bgplay = Thread(target=openbgmusic)
+    bgplay.start()
     global border_pen,score_pen, eqn_pen, end_message
     border_pen = turtle.Turtle()
     score_pen = turtle.Turtle()
@@ -82,4 +94,6 @@ def bg_end(scorestring, score):
             end_message.write("Good enough", align="center", font=("Arial", 40, "bold"))
 
 def quit_game(x,y):
+    bgmusic.terminate()
     turtle.bye()
+    

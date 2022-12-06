@@ -6,6 +6,9 @@ import random
 import time
 import json
 from itertools import cycle
+import sys 
+import subprocess
+from threading import Thread
 
 try:
     window = turtle.Screen()
@@ -14,22 +17,38 @@ try:
 
     begin_game = False
     nameInput = ""
+
+    def tickcolli():
+        global ticksound
+        if sys.platform == 'linux2': 
+            call(["xdg-open","game_music/correct.mp3"]) 
+        elif sys.platform == 'darwin': 
+            ticksound = subprocess.Popen(["afplay","game_music/correct.mp3"])
+    def crosscolli():
+        global xsound
+        if sys.platform == 'linux2': 
+            call(["xdg-open","game_music/wrong.mp3"]) 
+        elif sys.platform == 'darwin': 
+            xsound = subprocess.Popen(["afplay","game_music/wrong.mp3"])
+
+    # bgmusic = Thread(target=playbg)
+    tickmusic = Thread(target=tickcolli)
+    crossmusic = Thread(target=crosscolli)
     def beginner_begin(x,y):
         global game_mode
         game_mode = "beginner"
         global nameInput
         nameInput= turtle.textinput("Please input a username", "Please input a username")
         global begin_game 
-    
+
         while nameInput == "" or len(nameInput) >10 :
-            if nameInput == "" or nameInput == None:
+            if nameInput == "":
                 nameInput = turtle.textinput("You MUST input a valid name", "You MUST input a valid name")
             elif len(nameInput) >10:
                 nameInput = turtle.textinput("Name is too long", "Name must be less than 10 characters")
-
             elif nameInput == None:
                 begin_game = False
-    
+
         begin_game = True 
 
     def advanced_begin(x,y):
@@ -39,16 +58,16 @@ try:
         global nameInput
         nameInput= turtle.textinput("Please input a username", "Please input a username")
         global begin_game 
-    
+
         while nameInput == "" or len(nameInput) >10 :
-            if nameInput == "" or nameInput == None:
+            if nameInput == "":
                 nameInput = turtle.textinput("You MUST input a valid name", "You MUST input a valid name")
             elif len(nameInput) >10:
                 nameInput = turtle.textinput("Name is too long", "Name must be less than 10 characters")
         
             elif nameInput == None:
                 begin_game = False
-    
+
         begin_game = True 
 
 
@@ -96,7 +115,6 @@ try:
     while True:
         #setup background
         window.bgcolor("black")
-        window.title("Space Invaders - CopyAssignment")
         window.bgpic("game_gifs/background.gif")
         border_pen, score_pen, eqn_pen, end_message = game_bg.bg_setup()
         score = game_bg.score
@@ -173,12 +191,15 @@ try:
             global qn_num
             global score
             global Game_Over
+            global tickmusic
+            global crossmusic
             if enemy.isvisible():
                 # Reset the bullet
                 bullet.hideturtle()
                 game_icons.bulletstate = "ready"
                 bullet.setposition(0, -400)
                 if enemies[enemy] == list(eqns.values())[qn_num]:
+                    tickmusic.start()
                     enemy.hideturtle()
                     tick.setpos(enemy.xcor(),enemy.ycor())
                     tick.showturtle()
@@ -194,8 +215,10 @@ try:
                     )
                     qn_num+=1
                     game_bg.write_qn(qn_num,eqns)
+                    tickmusic = Thread(target=tickcolli)
                     # Game_Over = True
                 else:
+                    crossmusic.start()
                     enemy.hideturtle()
                     cross.setpos(enemy.xcor(),enemy.ycor())
                     cross.showturtle()
@@ -210,6 +233,7 @@ try:
                     score_pen.write(
                         scorestring, False, align="left", font=("Arial", 14, "normal"), 
                     )
+                    crossmusic = Thread(target=crosscolli)
 
         # For collision between enemy and player
         def isCollision_enemy_player(t1, t2):
@@ -335,6 +359,7 @@ try:
                 # break
                 win = turtle.Screen()
                 win.clear()
+                game_bg.bgmusic.terminate()
                 break
 except:
-    pass
+    game_bg.bgmusic.terminate()

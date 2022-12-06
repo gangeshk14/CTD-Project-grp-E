@@ -1,5 +1,14 @@
 import turtle
+import sys 
+import subprocess
+from threading import Thread
 #setup turtles
+def shootsoundeff():
+        global shootsound
+        if sys.platform == 'linux2': 
+            call(["xdg-open","sound.mp3"]) 
+        elif sys.platform == 'darwin': 
+            shootsound = subprocess.Popen(["afplay","game_music/shoot.wav"])
 def icons_setup():
     global player, tick, reset, quit, cross, bullet
     player = turtle.Turtle()
@@ -87,3 +96,5 @@ def fire_bullet():
         y = player.ycor() + 10
         bullet.setposition(x, y)
         bullet.showturtle()
+        shootmusic = Thread(target=shootsoundeff)
+        shootmusic.start()
