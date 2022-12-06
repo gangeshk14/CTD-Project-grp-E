@@ -78,20 +78,6 @@ try:
     colors = ['red','green','blue']
     itercolors = cycle(colors)
 
-    mousex = 0
-    mousey = 9
-    def motion(event):
-        global mousex
-        global mousey
-        mousex, mousey = event.x, event.y
-        # beginner.color('green')
-        # beginner.write('BEGINNER', False, align="left", font=("Public Pixel", 11, "bold"))
-        # if 216<=x<=302 and 334<=y<=358:
-        #     beginner.color('green')
-        # else:
-        #     beginner.color('green')
-        # print(type(mousex))
-
 
     while True: 
         clickbtn.write('Click buttons below to begin', False, align="left", font=("Public Pixel", 13, "bold"))
@@ -110,6 +96,7 @@ try:
         if begin_game:
             win = turtle.Screen()
             win.clear()
+            start_page.startmusic.terminate()
             break
 
     print(game_mode)
@@ -364,4 +351,5 @@ try:
                 game_bg.bgmusic.terminate()
                 break
 except:
+    start_page.startmusic.terminate()
     game_bg.bgmusic.terminate()

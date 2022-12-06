@@ -1,6 +1,20 @@
 import turtle
 from itertools import cycle
+import sys 
+import subprocess
+from threading import Thread
+
+def openstartmusic():
+    global startmusic
+    if sys.platform == 'linux2': 
+        call(["xdg-open","sound.mp3"]) 
+    elif sys.platform == 'darwin': 
+        startmusic = subprocess.Popen(["afplay","game_music/start_game.wav"])
+
 def start_page(beginnerScores,advScores):
+    global startplay
+    startplay = Thread(target=openstartmusic)
+    startplay.start()
     startgame = turtle.Turtle()
     beginner = turtle.Turtle()
     advanced = turtle.Turtle() 

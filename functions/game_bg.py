@@ -41,7 +41,8 @@ def bg_setup():
     turtle.register_shape("game_gifs/reset.gif")
     turtle.register_shape("game_gifs/end.gif") 
     turtle.register_shape("game_gifs/quit.gif")
-    turtle.register_shape("game_gifs/endreset.gif")
+    turtle.register_shape("game_gifs/endreset.gif") 
+    
 
 
 
