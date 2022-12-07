@@ -57,18 +57,7 @@
 #     rst +=1
 #     print(rst)
 # startover()
-import sys 
-import subprocess 
-from threading import Thread
-import time
-# def playmusic():
-#     if sys.platform == 'linux2': 
-#         call(["xdg-open","sound.mp3"]) 
-#     elif sys.platform == 'darwin': 
-#         call(["afplay","sound.mp3"])
-
-process = subprocess.Popen(["afplay","shrek.m4a"])
-time.sleep(5)
-process.terminate()
+import math
+print(math.isclose(8,12,rel_tol=0.15,abs_tol=15))
 
 

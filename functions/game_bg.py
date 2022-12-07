@@ -3,6 +3,7 @@ import random
 import sys 
 import subprocess
 from threading import Thread
+# import jsonfunc
 
 
 def openbgmusic():
@@ -33,8 +34,6 @@ def bg_setup():
     score_pen = turtle.Turtle()
     eqn_pen = turtle.Turtle()
     end_message = turtle.Turtle()
-    # Register the shape
-    #"C:\Users\yuyin\Downloads\CTD_1D\Picture1.png"
     turtle.register_shape("game_gifs/player.gif")
     turtle.register_shape("game_gifs/tick.gif")
     turtle.register_shape("game_gifs/cross.gif")
@@ -84,15 +83,21 @@ def bg_setup():
 
     return border_pen, score_pen, eqn_pen, end_message
 
-def bg_end(scorestring, score):
-        eqn_pen.clear()
-        score_pen.clear()
-        score_pen.setposition(0, 150)
-        score_pen.write(scorestring, False, align="center", font=("Arial", 40, "bold"))
-        if (score < 70):
-            end_message.write("You need to be better", align="center", font=("Arial", 40, "bold"))
-        else:
-            end_message.write("Good enough", align="center", font=("Arial", 40, "bold"))
+def bg_end(scorestring, score,gamemode,beginnerScores, advScores):
+    if gamemode == "beginner":
+        max_score = max(list(beginnerScores.values()))
+    elif gamemode == "advanced":
+        max_score = max(list(advScores.values()))
+    eqn_pen.clear()
+    score_pen.clear()
+    score_pen.setposition(0, 150)
+    score_pen.write(scorestring, False, align="center", font=("Arial", 40, "bold"))
+    if score>max_score:
+        end_message.write("New High Score!!!!", align="center", font=("Arial", 40, "bold"))
+    elif (score < 70):
+        end_message.write("You need to be better", align="center", font=("Arial", 40, "bold"))
+    else:
+        end_message.write("Good enough", align="center", font=("Arial", 40, "bold"))
 
 def quit_game(x,y):
     bgmusic.terminate()
