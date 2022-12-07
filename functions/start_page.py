@@ -67,9 +67,15 @@ def start_page(beginnerScores,advScores):
     for pos in range(5):
         k,v = list(beginnerScores.items())[pos]
         output = str(rank) + '. ' + k + ': ' +str(v)
-        bgHighScore.write(output, False, align="left", font=("Public Pixel", 9, "bold"))
-        bgHighScore.goto(-145, bgHighScore.ycor() - 20)
-        rank = rank + 1
+        if sys.platform == 'darwin':
+            bgHighScore.write(output, False, align="left", font=("Public Pixel", 9, "bold"))
+            bgHighScore.goto(-145, bgHighScore.ycor() - 20)
+            rank = rank + 1
+        else:
+            bgHighScore.write(output, False, align="left", font=("Public Pixel", 8, "bold"))
+            bgHighScore.goto(-145, bgHighScore.ycor() - 20)
+            rank = rank + 1
+
 
     # list of advancedscores
     advHighScore = turtle.Turtle()

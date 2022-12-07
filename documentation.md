@@ -1,14 +1,11 @@
 # CTD 1D Group E Math Invaders
 
-# Table of Contents
+# Table of Contents <!-- omit in toc -->
 
-- [CTD 1D Group E Math Invaders](#ctd-1d-group-e-math-invaders)
-- [Table of Contents](#table-of-contents)
   - [Members](#members)
   - [Overview](#overview)
     - [Motivation and Target Users](#motivation-and-target-users)
     - [Gameplay](#gameplay)
-    - [Features](#features)
   - [To run:](#to-run)
   - [Controls](#controls)
   - [Documentation](#documentation)
