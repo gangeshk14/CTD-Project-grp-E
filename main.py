@@ -196,7 +196,7 @@ try:
                         qn_num+=1
                         game_bg.write_qn(qn_num,eqns)
                         tickmusic = Thread(target=tickcolli)
-                        Game_Over = True
+                        # Game_Over = True
                     else:
                         crossmusic.start()
                         enemy.hideturtle()

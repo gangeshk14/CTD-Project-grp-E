@@ -64,7 +64,11 @@ def start_page(beginnerScores,advScores):
     bgHighScore.penup()
     bgHighScore.hideturtle()
     bgHighScore.setposition(-145, -50)
-    for pos in range(5):
+    if len(beginnerScores)<5:
+        scorerange = len(beginnerScores)
+    else:
+        scorerange = 5
+    for pos in range(scorerange):
         k,v = list(beginnerScores.items())[pos]
         output = str(rank) + '. ' + k + ': ' +str(v)
         if sys.platform == 'darwin':
@@ -85,7 +89,11 @@ def start_page(beginnerScores,advScores):
     advHighScore.hideturtle()
     advHighScore.setposition(30, -50)
     rank = 1
-    for pos in range(5):
+    if len(advScores)<5:
+        scorerange = len(beginnerScores)
+    else:
+        scorerange = 5
+    for pos in range(scorerange):
         k,v = list(advScores.items())[pos]
         output = str(rank) + '. ' + k + ': ' +str(v)
         advHighScore.write(output, False, align="left", font=("Public Pixel", 9, "bold"))
