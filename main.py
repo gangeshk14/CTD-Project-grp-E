@@ -88,7 +88,8 @@ try:
             if begin_game:
                 win = turtle.Screen()
                 win.clear()
-                start_page.startmusic.terminate()
+                if hasattr(start_page, 'startmusic'):
+                    start_page.startmusic.terminate()
                 break
 
         print(game_mode)
@@ -326,7 +327,8 @@ try:
             if rst and Game_Over:
                 win = turtle.Screen()
                 win.clear()
-                game_bg.bgmusic.terminate()
+                if hasattr(game_bg, 'bgmusic'):
+                    game_bg.bgmusic.terminate()
                 break
 except:
     if hasattr(start_page, 'startmusic'):
