@@ -126,7 +126,6 @@ try:
             # Creat an empty list of enemies
             ordered_enemies = {}
             #choose pos of ans:
-            ans_pos = random.randint(0,9)
             # Add enemies to the list
             for eqn,ans in eqns.items():
                 # create the enemy
@@ -216,8 +215,8 @@ try:
 
             # For collision between enemy and player
             def isCollision_enemy_player(t1, t2):
-                if type(t1) == 'int':
-                    pass
+                # if type(t1) == 'int':
+                #     pass
                 distance = math.sqrt(
                     math.pow(t1.xcor() - t2.xcor(), 2) + math.pow(t1.ycor() - t2.ycor(), 2)
                 )
@@ -281,10 +280,6 @@ try:
                 if game_icons.bulletstate == "fire":
                     enemy_pos = 0
                     xbull = bullet.xcor()
-                    # print(bullet.ycor())
-                    # newEnem = {i.ycor():i for i in enemies}
-                    # sortEnem = {ycor:Enem for ycor,Enem in sorted(newEnem.items())}
-                    # print(sortEnem)git 
                     for enemy,ans in enemies.items():
                         if enemy.isvisible():
                             xcoord = enemy.xcor()
@@ -303,21 +298,12 @@ try:
                         bullet.forward(530)
                         bullet.hideturtle()
                         game_icons.bulletstate = "ready"
-                            
-                    # y += bulletspeed
-                    # bullet.sety(y)
-                    # bullet.forward(600)
 
                 # Check to see if the bullet has gone to the top
                 if bullet.ycor() > 275:
                     bullet.hideturtle()
                     game_icons.bulletstate = "ready"
                 if rst:
-                    # for enemy,digits in enemies.items():
-                    #     enemy.clear()
-                    # player.clear()
-                    # bullet.clear()
-                    # break
                     win = turtle.Screen()
                     win.clear()
                     game_bg.bgmusic.terminate()
