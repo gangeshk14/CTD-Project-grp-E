@@ -23,14 +23,13 @@
 
 
 
-
 ## Members
 
-- Gangesh Kumar
-- Haresh Jayant
-- Julian How
-- Yu Ying
-- Sushmitha
+- Gangesh Kumar - 1007181
+- Haresh Jayant - 1007148
+- Julian How - 1006913
+- Yu Ying - 1007218
+- Sushmitha - 1007057
 
 ## Overview
 
@@ -136,8 +135,8 @@ All background music in this code is played using thread and subprocess with the
 ```python
 if sys.platform == 'linux2':
         bgmusic = subprocess.Popen(["afplay","<soundfile>"])
-    elif sys.platform == 'darwin':
-        bgmusic = subprocess.Popen(["afplay","<soundfile>"])
+elif sys.platform == 'darwin':
+    bgmusic = subprocess.Popen(["afplay","<soundfile>"])
 ```
 
 The above code is then attached to a thread using a function to allow for it to be run concurrently with the game.

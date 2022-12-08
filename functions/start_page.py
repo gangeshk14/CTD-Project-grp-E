@@ -90,15 +90,21 @@ def start_page(beginnerScores,advScores):
     advHighScore.setposition(30, -50)
     rank = 1
     if len(advScores)<5:
-        scorerange = len(beginnerScores)
+        scorerange = len(advScores)
     else:
         scorerange = 5
     for pos in range(scorerange):
         k,v = list(advScores.items())[pos]
         output = str(rank) + '. ' + k + ': ' +str(v)
-        advHighScore.write(output, False, align="left", font=("Public Pixel", 9, "bold"))
-        advHighScore.goto(30, advHighScore.ycor() - 20)
-        rank +=1
+        if sys.platform == 'darwin':
+            advHighScore.write(output, False, align="left", font=("Public Pixel", 9, "bold"))
+            advHighScore.goto(30, advHighScore.ycor() - 20)
+            rank +=1
+        else:
+            advHighScore.write(output, False, align="left", font=("Public Pixel", 9, "bold"))
+            advHighScore.goto(30, advHighScore.ycor() - 20)
+            rank +=1
+
 
     clickbtn.color('white')
     clickbtn.speed(0)

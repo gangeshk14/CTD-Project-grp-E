@@ -42,14 +42,13 @@ try:
             global nameInput
             nameInput= turtle.textinput("Please input a username", "Please input a username")
             global begin_game 
-
+            if nameInput == None:
+                return
             while nameInput.strip() == "" or len(nameInput) >10 :
                 if nameInput.strip() == "":
                     nameInput = turtle.textinput("You MUST input a valid name", "You MUST input a valid name")
                 elif len(nameInput) >10:
                     nameInput = turtle.textinput("Name is too long", "Name must be less than 10 characters")
-                elif nameInput == None:
-                    begin_game = False
 
             begin_game = True 
 
@@ -60,15 +59,14 @@ try:
             global nameInput
             nameInput= turtle.textinput("Please input a username", "Please input a username")
             global begin_game 
+            if nameInput == None:
+                return
 
-            while nameInput == "" or len(nameInput) >10 :
-                if nameInput == "":
+            while nameInput.strip() == "" or len(nameInput) >10 :
+                if nameInput.strip() == "":
                     nameInput = turtle.textinput("You MUST input a valid name", "You MUST input a valid name")
                 elif len(nameInput) >10:
                     nameInput = turtle.textinput("Name is too long", "Name must be less than 10 characters")
-            
-                elif nameInput == None:
-                    begin_game = False
 
             begin_game = True 
 
